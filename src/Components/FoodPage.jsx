@@ -5,13 +5,31 @@ import Card from '@mui/material/Card';
 import Button from './Button';
 import ViewOrder from './ViewOrder';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToOrder, removeItemFromOrder } from '../Slices/OrderDetailsSlice';
-
+import { addItemToOrder, removeItemFromOrder, resetStore } from '../Slices/OrderDetailsSlice';
+import {persistor} from "@/Store/Store"
 function FoodPage() {
+    const [mounted, setMounted] = React.useState(false);
+    let isDisabled = true
     const dispatch = useDispatch();
     const orders = useSelector((state) => state.orderDetails.orders);
-    const total_price = useSelector((state) => state.orderDetails.total_price);
+    isDisabled = !orders || orders.length === 0;
 
+    const total_price = useSelector((state) => state.orderDetails.total_price);
+    React.useEffect(() => {
+        const navEntry = performance.getEntriesByType("navigation")[0];
+        const isReload = navEntry?.type === "reload";
+
+        if (isReload) {
+            // ✅ Only reset store on hard reload
+            dispatch(resetStore());
+
+            // If using redux-persist
+            persistor.purge?.();
+        }
+    }, []);
+
+    React.useEffect(() => setMounted(true), []);
+    if (!mounted) return null;
 
     const getQuantityById = (id) => {
         const item = orders.find(order => order.id === id);
@@ -27,7 +45,7 @@ function FoodPage() {
                         className="text-white bg-yellow-500 hover:bg-yellow-600 flex justify-center items-center w-full h-8 rounded-lg "
                         onClick={() => { dispatch(addItemToOrder(item.id)) }}
                     />
-                        
+
                 ) : (
                     <div className="flex items-center justify-center gap-x-2 w-12">
                         <Button
@@ -36,7 +54,7 @@ function FoodPage() {
                             className="text-white w-8 bg-red-500 hover:bg-red-600 h-8 rounded-full flex items-center justify-center"
                             onClick={() => dispatch(removeItemFromOrder(item.id))}
                         >
-                            
+
                         </Button>
 
                         <Button
@@ -58,7 +76,7 @@ function FoodPage() {
     return (
         <div>
             <div className="min-h-screen w-screen bg-gray-900 relative overflow-hidden p-6"
-            style={{ backgroundImage: "url('/snow.gif')" }}>
+                style={{ backgroundImage: "url('/snow.gif')" }}>
                 {/* Scattered stars background */}
 
                 <div className="relative z-10 ">
@@ -97,13 +115,13 @@ function FoodPage() {
                                     </div>
 
                                     {/* Action button */}
-                                    <div className="pt-2 " style={{    alignItems: "center",justifyItems: "center"}}>{renderActionButton(item)}</div>
+                                    <div className="pt-2 " style={{ alignItems: "center", justifyItems: "center" }}>{renderActionButton(item)}</div>
                                 </div>
                             </Card>
                         ))}
                     </div>
                 </div>
-                <ViewOrder total={total_price.toFixed(2)} />
+                <ViewOrder isDisabled={isDisabled} total={total_price.toFixed(2)} />
             </div>
         </div>
     )
