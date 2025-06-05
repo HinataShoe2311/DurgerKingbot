@@ -32,8 +32,8 @@ const ViewOrder = () => {
           </div>
         </ListItem>
       </div>
-      <div className=" w-screen bg-gray-900 relative overflow-hidden flex pb-6 justify-center">
-        <List sx={{ width: '100%', maxWidth: 360 }} className='bg-gray-900'>
+      <div className=" w-screen bg-gray-900 relative overflow-hidden flex p-2 pb-6 justify-center">
+        <List sx={{ width: '100%' }} className='bg-gray-900'>
           {ORDER_DETAILS.map((item) => (
             <ListItem key={item.id} className='bg-gray-800'>
               <ListItemAvatar>
