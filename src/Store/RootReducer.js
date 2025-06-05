@@ -1,5 +1,6 @@
 // src/Store/RootReducer.js
 import OrderDetailsSlice from "@/Slices/OrderDetailsSlice";
-export const reducer = {
-    orderDetails: OrderDetailsSlice.reducer,
-};
+import { combineReducers } from 'redux';
+export const rootReducer = combineReducers({
+  orderDetails: OrderDetailsSlice.reducer,
+});

@@ -41,9 +41,10 @@ const OrderDetailsSlice = createSlice({
         }
         state.total_price -= item.price;
       }
-    }
+    },
+    resetStore: () => initialState,
   }
 });
 
-export const { addItemToOrder, removeItemFromOrder } = OrderDetailsSlice.actions;
+export const { addItemToOrder, removeItemFromOrder, resetStore } = OrderDetailsSlice.actions;
 export default OrderDetailsSlice;
