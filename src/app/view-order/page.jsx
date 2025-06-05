@@ -32,7 +32,7 @@ const ViewOrder = () => {
           </div>
         </ListItem>
       </div>
-      <div className=" w-screen bg-gray-900 relative overflow-hidden flex p-2 pb-6 justify-center">
+      <div className=" w-screen bg-gray-900 relative overflow-hidden flex p-2 pb-1 justify-center">
         <List sx={{ width: '100%' }} className='bg-gray-900'>
           {ORDER_DETAILS.map((item) => (
             <ListItem key={item.id} className='bg-gray-800'>
@@ -62,7 +62,7 @@ const ViewOrder = () => {
           ))}
         </List>
       </div>
-      <div className="w-screen bg-gray-900 relative overflow-hidden p-2 flex  ">
+      <div className="w-screen bg-gray-900 relative overflow-hidden p-2 pb-18 flex  ">
         <ListItem key={"OrderList"} className='bg-gray-800'>
           <ListItemText
             primary={"Total "}
