@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { foodItems } from '@/Constant/food'
 import Card from '@mui/material/Card';
 import Button from './Button';
-import ProceedToPay from './ProceedToPay';
+import ViewOrder from './ViewOrder';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToOrder, removeItemFromOrder } from '../Slices/OrderDetailsSlice';
 
@@ -107,7 +107,7 @@ function FoodPage() {
                         ))}
                     </div>
                 </div>
-                <ProceedToPay total={total_price.toFixed(2)} />
+                <ViewOrder total={total_price.toFixed(2)} />
             </div>
         </div>
     )
