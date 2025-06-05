@@ -8,12 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItemToOrder, removeItemFromOrder } from '../Slices/OrderDetailsSlice';
 
 function FoodPage() {
-    const [quantities, setQuantities] = useState({})
-    // console.log(foodItems)
     const dispatch = useDispatch();
     const orders = useSelector((state) => state.orderDetails.orders);
     const total_price = useSelector((state) => state.orderDetails.total_price);
-    console.log(orders)
 
 
     const getQuantityById = (id) => {
@@ -74,7 +71,6 @@ function FoodPage() {
                                 elevation={4}
                                 className="bg-gray-900/60 backdrop-blur-md rounded-xl p-4   shadow-lg hover:shadow-2xl transition-all duration-300 transform  ">
                                 <div className="text-center space-y-3">
-                                    {/* Food emoji */}
                                     <div className="text-5xl mb-2 relative">
                                         {item.emoji}
                                         <div
