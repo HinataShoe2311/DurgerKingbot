@@ -6,6 +6,7 @@ import Button from './Button';
 import ViewOrder from './ViewOrder';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToOrder, removeItemFromOrder, resetStore } from '../Slices/OrderDetailsSlice';
+import { resetPaymentStore } from '@/Slices/PaymentRequestSlice';
 import {persistor} from "@/Store/Store"
 function FoodPage() {
     const [mounted, setMounted] = React.useState(false);
@@ -22,6 +23,7 @@ function FoodPage() {
         if (isReload) {
             // ✅ Only reset store on hard reload
             dispatch(resetStore());
+            dispatch(resetPaymentStore())
 
             // If using redux-persist
             persistor.purge?.();
