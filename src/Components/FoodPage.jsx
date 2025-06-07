@@ -1,5 +1,5 @@
+"use client"
 import React from 'react'
-import { useState } from 'react';
 import { foodItems } from '@/Constant/food'
 import Card from '@mui/material/Card';
 import Button from './Button';
@@ -7,7 +7,8 @@ import ViewOrder from './ViewOrder';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemToOrder, removeItemFromOrder, resetStore } from '../Slices/OrderDetailsSlice';
 import { resetPaymentStore } from '@/Slices/PaymentRequestSlice';
-import {persistor} from "@/Store/Store"
+import { persistor } from "@/Store/Store"
+import { setInitData } from '@/Slices/userDetailsSlice';
 function FoodPage() {
     const [mounted, setMounted] = React.useState(false);
     let isDisabled = true
@@ -24,9 +25,21 @@ function FoodPage() {
             // ✅ Only reset store on hard reload
             dispatch(resetStore());
             dispatch(resetPaymentStore())
-
+            sessionStorage.clear()
             // If using redux-persist
             persistor.purge?.();
+        }
+    }, []);
+
+
+
+
+    React.useEffect(() => {
+        if (typeof window !== "undefined" && window.Telegram?.WebApp?.initDataUnsafe) {
+            const initData = window.Telegram.WebApp.initDataUnsafe;
+            dispatch(setInitData(JSON.stringify(initData?.user?.id, null, 2)))
+            localStorage.setItem("telegram_user", JSON.stringify(initData?.user?.id, null, 2));
+            sessionStorage.setItem("telegram_user", JSON.stringify(initData?.user?.id, null, 2));
         }
     }, []);
 
@@ -74,9 +87,9 @@ function FoodPage() {
         );
     };
 
-
     return (
         <div>
+
             <div className="min-h-screen w-screen bg-gray-900 relative overflow-hidden p-6"
                 style={{ backgroundImage: "url('/snow.gif')" }}>
                 {/* Scattered stars background */}
