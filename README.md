@@ -16,6 +16,31 @@ A fast and responsive Burger King chatbot web clone built using Next.js. This pr
 #### 📱 Mobile-first, responsive design
 #### 🔍 Tech Stack: Next.js, React, Redux Toolkit, Tailwind CSS, Razorpay API, Telegram Bot API
 
+## 🌟 Star This Repo
+
+If you found this project useful, please consider giving it a ⭐️ to show your support and help others discover it!
+
+[![GitHub Stars](https://img.shields.io/github/stars/ErManoj-Sharma/DurgerKingbot?style=social)](https://github.com/ErManoj-Sharma/DurgerKingbot)
+
+---
+
+## 📦 Clone & Run Locally
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/ErManoj-Sharma/DurgerKingbot
+cd DurgerKingbot
+
+# 2. Install dependencies
+npm install
+
+# 3. Add your environment variables
+cp .env.example .env.local
+# Fill in values for Telegram bot token, Razorpay/Stripe keys, etc.
+
+# 4. Run the development server
+npm run dev
+```
 ## Bot setup
 1. go to @botfather in telegram 
 2. give command `/mybots`.
@@ -87,28 +112,3 @@ if you use payment gateway then it will redirect to callback url
 , at callback url data of localstorage, sessionstorage and redux store is wiped up. 
 
 so pass the necessary and reqiured info in callback url as searchparams and at callback url page use api to retrive data
-
-## 🌟 Star This Repo
-
-If you found this project useful, please consider giving it a ⭐️ to show your support and help others discover it!
-
-[![GitHub Stars](https://img.shields.io/github/stars/ErManoj-Sharma/DurgerKingbot?style=social)](https://github.com/ErManoj-Sharma/DurgerKingbot)
-
----
-
-## 📦 Clone & Run Locally
-
-```bash
-# 1. Clone the repo
-git clone https://github.com/ErManoj-Sharma/DurgerKingbot
-cd DurgerKingbot
-
-# 2. Install dependencies
-npm install
-
-# 3. Add your environment variables
-cp .env.example .env.local
-# Fill in values for Telegram bot token, Razorpay/Stripe keys, etc.
-
-# 4. Run the development server
-npm run dev
