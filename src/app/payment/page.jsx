@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, use } from 'react'
+import React, { useState, useEffect } from 'react'
 import { List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material'
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -14,7 +14,7 @@ import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
 import { useRouter } from 'next/navigation';
 import { CALLBACK_URL } from '@/Services/ApiConfig';
-import {paymentRequest} from "@/Slices/PaymentRequestSlice"
+import { paymentRequest } from "@/Slices/PaymentRequestSlice"
 import { useDispatch } from 'react-redux';
 function page() {
     const ORDER_DETAILS = useSelector((state) => state.orderDetails.orders);
@@ -27,11 +27,10 @@ function page() {
     const [email, setEmail] = useState()
     const router = useRouter()
     const dispatch = useDispatch()
-     // Load saved data from localStorage on mount
+    // Load saved data from localStorage on mount
     useEffect(() => {
         const savedData = localStorage.getItem("userCheckoutInfo");
         const sessionData = sessionStorage.getItem("userCheckoutInfo")
-
         if (savedData) {
             try {
                 const parsed = JSON.parse(savedData);
@@ -64,14 +63,19 @@ function page() {
             }
         }
     }, []);
-
+    const getExpireTime = () => {
+        let time = Date.now() + 15 * 60 * 1000
+        return time
+    }
     const ProceedToPay = () => {
+        const user_id = localStorage.getItem("telegram_user") || sessionStorage.getItem("telegram_user")
+        const orders = ORDER_DETAILS.map(({ emoji, ...rest }) => rest)
         let body =
         {
             "amount": ORDER_TOTAL * 100,
             "currency": "INR",
             "accept_partial": false,
-            "expire_by": Date.now() + 15 * 60 * 1000,
+            "expire_by": getExpireTime(),
             "reference_id": ORDER_ID,
             "description": `Payment for Order #${ORDER_ID}`,
             "customer": {
@@ -84,8 +88,12 @@ function page() {
                 "email": true
             },
             "reminder_enable": true,
-            "notes": {},
-            "callback_url": CALLBACK_URL,
+            "notes": {
+                "order": orders,
+                "order_total": ORDER_TOTAL,
+                "order_id": ORDER_ID
+            },
+            "callback_url": `${CALLBACK_URL}?user_id=${user_id}`,
             "callback_method": "get"
         }
         dispatch(paymentRequest(body))

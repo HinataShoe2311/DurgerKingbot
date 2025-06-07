@@ -1,6 +1,6 @@
 const createPaymentLink = async (body = {}) => {
   try {
-    debugger
+    
     const response = await fetch("/api/payment-link", {
       method: "POST",
       headers: {

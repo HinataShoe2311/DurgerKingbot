@@ -1,4 +1,5 @@
 // Slice for Async API calls
+"use client"
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import createPaymentLink from "@/Services/CreatePaymentLink";
 const initialState = {
@@ -9,7 +10,6 @@ const initialState = {
 
 export const paymentRequest = createAsyncThunk("payment/CreateLinks", (body) => {
   // getUserDetails is an API call
-  debugger
   return createPaymentLink(body);
 });
 
@@ -26,7 +26,7 @@ const PaymentRequestSlice = createSlice({
     builder.addCase(paymentRequest.fulfilled, (state, action) => {
       state.loading = false;
       state.paymentRequestDetails = action.payload;
-      debugger
+      
       window.location.href = action.payload.short_url;
 
       state.error = "";
