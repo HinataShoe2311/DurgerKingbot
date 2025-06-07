@@ -1,6 +1,22 @@
-# telegram web app creation
 
-## bot setup
+## Project Description:
+
+# 🚀 BurgerKing Bot Clone – Built with Next.js
+
+A fast and responsive Burger King chatbot web clone built using Next.js. This project replicates a real-world food ordering experience via Telegram-style bot interaction, enabling users to browse menus, place orders, and make payments seamlessly.
+
+### 🔹 Key Features:
+
+#### 🧠 Interactive chat-based UI inspired by Burger King's ordering bot
+#### ⚡ Built with Next.js for server-side rendering and SEO benefits
+#### 💳 Payment integration with Razorpay/Stripe (custom amount & callbacks)
+#### 🍔 Dynamic menu with emojis, quantity handling, and total price calculation
+#### 🔐 User session management with Redux Toolkit
+#### 🌐 Telegram Web App support with bot-to-app communication
+#### 📱 Mobile-first, responsive design
+#### 🔍 Tech Stack: Next.js, React, Redux Toolkit, Tailwind CSS, Razorpay API, Telegram Bot API
+
+## Bot setup
 1. go to @botfather in telegram 
 2. give command `/mybots`.
 3. select your desired bot or if you dont have any bot then create a new bot by command `/newbot`.
@@ -21,7 +37,7 @@
 
 # .env.local
 ```python
-# ar root of project create .env.local 
+# at root of project create .env.local 
 RAZORPAY_KEY="XXXXXXXXXXXXXX"
 RAZORPAY_SECRET="XXXXXXXXXXXXXXX"
 TELEGRAM_BOT_TOKEN="XXXXXXXXXXX"
