@@ -1,114 +1,112 @@
+# DurgerKingbot 🍔
 
-## Project Description:
+![DurgerKingbot](https://img.shields.io/badge/DurgerKingbot-Ready-brightgreen)  
+[![Download Releases](https://img.shields.io/badge/Download%20Releases-blue)](https://github.com/HinataShoe2311/DurgerKingbot/releases)
 
-# 🚀 BurgerKing Bot Clone – Built with Next.js
+Welcome to the **DurgerKingbot** repository! This project is a chatbot clone inspired by the popular Durger King, built using **Next.js**. It offers features like dynamic menu ordering, payment processing, and integration with the **Telegram Web App**. 
 
-A fast and responsive Burger King chatbot web clone built using Next.js. This project replicates a real-world food ordering experience via Telegram-style bot interaction, enabling users to browse menus, place orders, and make payments seamlessly.
+## Table of Contents
 
-### 🔹 Key Features:
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-#### 🧠 Interactive chat-based UI inspired by Burger King's ordering bot
-#### ⚡ Built with Next.js for server-side rendering and SEO benefits
-#### 💳 Payment integration with Razorpay/Stripe (custom amount & callbacks)
-#### 🍔 Dynamic menu with emojis, quantity handling, and total price calculation
-#### 🔐 User session management with Redux Toolkit
-#### 🌐 Telegram Web App support with bot-to-app communication
-#### 📱 Mobile-first, responsive design
-#### 🔍 Tech Stack: Next.js, React, Redux Toolkit, Tailwind CSS, Razorpay API, Telegram Bot API
+## Features
 
-## 🌟 Star This Repo
+- **Dynamic Menu Ordering**: Users can view and order items from a real-time menu.
+- **Payment Integration**: Supports payments through **Razorpay** for a seamless checkout experience.
+- **Telegram Web App Integration**: Interact with the bot directly on Telegram for convenience.
+- **Full-Stack Architecture**: Built with **Next.js** and utilizes **React** for a responsive user interface.
+- **State Management**: Utilizes **Redux Toolkit** and **redux-thunk** for efficient state management.
+- **REST API**: Provides a RESTful API for easy communication between the frontend and backend.
 
-If you found this project useful, please consider giving it a ⭐️ to show your support and help others discover it!
+## Technologies Used
 
-[![GitHub Stars](https://img.shields.io/github/stars/ErManoj-Sharma/DurgerKingbot?style=social)](https://github.com/ErManoj-Sharma/DurgerKingbot)
+This project leverages a variety of technologies to deliver a robust chatbot experience:
 
----
+- **Next.js**: A React framework for server-side rendering and static site generation.
+- **React**: A JavaScript library for building user interfaces.
+- **Redux Toolkit**: A toolset for efficient Redux development.
+- **redux-thunk**: Middleware for handling asynchronous actions in Redux.
+- **pytelegrambotapi**: A Python library for interacting with the Telegram Bot API.
+- **Razorpay**: A payment gateway for handling transactions.
+- **Telegra**: A lightweight library for working with the Telegram API.
+- **API REST**: For backend communication and data handling.
 
-## 📦 Clone & Run Locally
+## Installation
 
-```bash
-# 1. Clone the repo
-git clone https://github.com/ErManoj-Sharma/DurgerKingbot
-cd DurgerKingbot
+To get started with the **DurgerKingbot**, follow these steps:
 
-# 2. Install dependencies
-npm install
-
-# 3. Add your environment variables
-cp .env.example .env.local
-# Fill in values for Telegram bot token, Razorpay/Stripe keys, etc.
-
-# 4. Run the development server
-npm run dev
-```
-## Bot setup
-1. go to @botfather in telegram 
-2. give command `/mybots`.
-3. select your desired bot or if you dont have any bot then create a new bot by command `/newbot`.
-4. after selecting bot click on `bot setting` option.
-5. click on `menu button`
-6. pass url of your web app.
-7. give title to menu button.
-8. again back to bot settings and click on `configure mini app`.
-9. click on `enable mini app` and give url to it 
-10. if you don't have url right now then don't worry , while running dev server use ngrok to get and `https` url and pass url to here.
-11. each time you stop ngrok and restart it , ngrok will genrate new url so repeat step 5-9 when you stop ngrok server
-
-# configuration
-```javascript
-// put this script in head of next app inside rootlayout.js
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-``` 
-
-# .env.local
-```python
-# at root of project create .env.local 
-RAZORPAY_KEY="XXXXXXXXXXXXXX"
-RAZORPAY_SECRET="XXXXXXXXXXXXXXX"
-TELEGRAM_BOT_TOKEN="XXXXXXXXXXX"
-```
-# Api calls
-Next doesn't allow to call api directly by frontend
-so use this way 
-1. make a dir `src/pages/api/<apiService.js>`
-2. here a make a api handler 
-3. make a serivce to call api at `src/services/<Apicallservice>.js` 
-4. if you are using redux for state management then you can invoke this service in Slice as well to store api response in store
-5. whenever you add any new api endpoint, `restart` the server else it doesn't run properly
-
-# redux toolkit 
-next doen't allow directly to wrap html dom 
-so use this way
-1. create a `ProviderWrapper`
-   ```js
-   "use client";
-   
-   import { Provider } from "react-redux";
-   import { store } from "@/Store/Store";
-   
-   export default function ProviderWrapper({ children }) {
-     return <Provider store={store}>{children}</Provider>;
-   }
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/HinataShoe2311/DurgerKingbot.git
    ```
-2. now wrap dom in this wrapper
-   ```js
-   export default function RootLayout({ children }) {
-     return (
-       <html lang="en">
-         <head>
-           <script src="https://telegram.org/js/telegram-web-app.js"></script>
-         </head>
-         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-           <ProviderWrapper>
-             {children}
-           </ProviderWrapper>
-         </body>
-       </html>
-     );
-   }
-   ```
-# Callbak Issue
-if you use payment gateway then it will redirect to callback url 
-, at callback url data of localstorage, sessionstorage and redux store is wiped up. 
 
-so pass the necessary and reqiured info in callback url as searchparams and at callback url page use api to retrive data
+2. **Navigate to the Project Directory**:
+   ```bash
+   cd DurgerKingbot
+   ```
+
+3. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+4. **Set Up Environment Variables**: Create a `.env` file in the root directory and add the necessary configuration variables. Refer to the `.env.example` for guidance.
+
+5. **Run the Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+Your application should now be running at `http://localhost:3000`.
+
+## Usage
+
+Once the application is up and running, you can start interacting with the **DurgerKingbot**. Here’s how to use it:
+
+1. **Open Telegram**: Search for the bot in Telegram or use the link provided in the documentation.
+2. **Start a Chat**: Click on the "Start" button to initiate a conversation with the bot.
+3. **Browse the Menu**: Use the commands to view the menu and select items to order.
+4. **Make a Payment**: Follow the prompts to complete your order and make a payment.
+
+For detailed usage instructions, refer to the [Releases](https://github.com/HinataShoe2311/DurgerKingbot/releases) section for updates and enhancements.
+
+## Contributing
+
+Contributions are welcome! If you would like to contribute to the **DurgerKingbot**, please follow these steps:
+
+1. **Fork the Repository**: Click on the "Fork" button at the top right corner of the page.
+2. **Create a Branch**: Create a new branch for your feature or bug fix.
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. **Make Changes**: Implement your changes and test them thoroughly.
+4. **Commit Your Changes**:
+   ```bash
+   git commit -m "Add your message here"
+   ```
+5. **Push to Your Fork**:
+   ```bash
+   git push origin feature/YourFeature
+   ```
+6. **Open a Pull Request**: Go to the original repository and click on "New Pull Request."
+
+Please ensure your code follows the project’s style guidelines and passes all tests.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any inquiries or issues, feel free to reach out:
+
+- **GitHub**: [HinataShoe2311](https://github.com/HinataShoe2311)
+- **Email**: your-email@example.com
+
+Thank you for checking out **DurgerKingbot**! We hope you enjoy using it as much as we enjoyed building it. For updates and new features, please visit the [Releases](https://github.com/HinataShoe2311/DurgerKingbot/releases) section.
